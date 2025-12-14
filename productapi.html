@@ -1,0 +1,102 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Api</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <div>
+        <nav class="navbar navbar-expand-lg bg-dark ">
+            <div class="container-fluid ms-5">
+                <a class="navbar-brand h1 text-warning fs-4 mx-5"><i class="fa-solid fa-store mx-2"></i>**STELLA**</a>
+            </div>
+
+            <form class="d-flex input-group my-2 me-5 " role="search">
+                <input class="form-control" type="search" placeholder="What are you looking for?" aria-label="Search" />
+                <div class="input-group-text bg-warning"><i class="fa-solid fa-magnifying-glass"></i></div>
+            </form>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-3">
+                    <li class="nav-item ms-5">
+                        <a class="nav-link active d-flex text-light" aria-current="page" href="#"><i
+                                class="fa-solid fa-rotate-left me-2 my-1"></i> Return</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active d-flex text-light" aria-current="page" href="#"><i
+                                class="fa-solid fa-globe me-2 my-1"></i> English</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active d-flex text-light" aria-current="page" href="#"><i
+                                class="fa-solid fa-heart me-2 my-1 text-danger"></i> Whishlist</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link active d-flex text-light" aria-current="page" href="#"><i
+                                class="fa-solid fa-user-tie me-2 my-1"></i> Account</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link active d-flex text-light" aria-current="page" href="#"><i
+                                class="fa-solid fa-cart-shopping me-2 my-1"></i> Cart <i
+                                class="fa-solid fa-3 ms-2 bg-warning p-1 rounded text-dark me-5"></i></a>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+
+        <div>
+            <img src="/images/offer.jpg" style="width:1265px; height:450px;" alt="Responsive image" />
+        </div>
+
+        <div id="sale" class="row g-4"></div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+
+    <script>
+        async function FetchSale() {
+            let data = await (await fetch("https://dummyjson.com/products")).json();
+            console.log(data);
+            let products = data.products;
+
+            for (let i = 0; i < products.length; i++) {
+                document.getElementById("sale").innerHTML += ` <div class="col-md-3 mb-4">
+          <div class="card h-100 text-center p-2 position-relative">
+            <span class="badge bg-success position-absolute top-0 start-0 m-2">
+              New Arrival
+            </span> 
+            <img src="${products[i].thumbnail}" class="card-img-top" style="height:180px object-fit:contain"> 
+            <div class="card-body">
+            <h6 class="text-uppercase text-muted">${products[i].brand || "Brand"}</h6>
+            <p class="small">${products[i].title}</p>
+            <h6 class="text-danger fw-bold">SAR ₹ ${products[i].price}</h6>
+              ⭐⭐⭐⭐☆
+            </div> 
+            <div class="card-footer bg-white border-0">
+              <button class="btn btn-dark w-100">🔒 Quick Add</button>
+            </div>
+          </div>
+        </div>`;
+            }
+        }
+
+        FetchSale();
+    </script>
+
+
+</body>
+
+</html>
